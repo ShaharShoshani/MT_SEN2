@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.shahar.ex3_mt.UserProfile"
+    android:layoutDirection="ltr"
+    android:background="@color/background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:id="@+id/tv_user_name_MyProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="User name:"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            />
+        <EditText
+            android:id="@+id/edt_user_name_MyProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:enabled="false"
+            android:text="EliNoyShahar"
+            />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:id="@+id/tv_first_name_MyProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="First name:"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            />
+        <EditText
+            android:id="@+id/edt_first_name_MyProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:enabled="false"
+            android:text="Eliran_Noy_Shahar"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:id="@+id/tv_last_name_MyProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="Last name:"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            />
+        <EditText
+            android:id="@+id/edt_last_name_MyProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:text="Kasif_Simantov_Shoshani"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:id="@+id/tv_street_MyProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="Street name:"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            />
+        <EditText
+            android:id="@+id/edt_street_MyProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:text="Yafe Nof 7"
+            />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:id="@+id/tv_city_MyProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="City name:"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            />
+        <EditText
+            android:id="@+id/edt_city_MyProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:text="Ariel"
+            />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:id="@+id/tv_email_MyProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="Email address:"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            />
+        <EditText
+            android:id="@+id/edt_email_MyProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:text="ENS@gmail.com"
+            />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="190dp"
+
+        >
+        <Button
+            android:id="@+id/btn_backtomenu_MyProfile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Back to menu"
+            android:textSize="20sp"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
+android:background="@drawable/btn"
+            />
+
+
+    </LinearLayout>
+</LinearLayout>

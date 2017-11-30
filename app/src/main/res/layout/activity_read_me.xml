@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.shahar.ex3_mt.ReadMe"
+    android:orientation="vertical"
+    android:background="@color/background">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="README"
+        android:gravity="center"
+        android:textColor="@color/colorReadme"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="here you can see what our app does"
+        android:textColor="@color/colorReadmeText"
+        android:textSize="20sp"
+        />
+    <Button
+        android:id="@+id/btn_readmeBackToMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="300dp"
+        android:text="Back to Menu"
+        android:textSize="20sp"
+        android:textColor="@color/colorWhite"
+        android:textStyle="bold"
+        android:background="@drawable/btn"
+        android:padding="10dp"
+        android:layout_margin="10dp"/>
+
+
+
+
+
+
+
+</LinearLayout>

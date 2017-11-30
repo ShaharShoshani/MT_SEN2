@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.shahar.ex3_mt.HomePage"
+    android:gravity="center"
+    android:layoutDirection="ltr"
+    android:background="@color/background"
+    android:orientation="vertical">
+    <Button
+        android:id="@+id/btn_map_HomePage"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="Map"
+        android:textSize="20sp"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        android:background="@drawable/btn"
+        android:padding="10dp"
+        android:layout_margin="10dp"/>
+    <Button
+        android:id="@+id/btn_readme_HomePage"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="ReadMe"
+        android:textSize="20sp"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        android:background="@drawable/btn"
+        android:padding="10dp"
+        android:layout_margin="10dp"/>
+    <Button
+        android:id="@+id/btn_myprofile_HomePage"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="My Profile"
+        android:textSize="20sp"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        android:background="@drawable/btn"
+        android:padding="10dp"/>
+    <Button
+        android:id="@+id/btn_logout_HomePage"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Log Out"
+        android:textSize="20sp"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        android:background="@drawable/btn"
+        android:padding="10dp"/>
+
+</LinearLayout>

@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="vertical"
+    android:background="@color/background">
+<LinearLayout
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.shahar.ex3_mt.RegisterActivity"
+    android:layoutDirection="ltr"
+    android:orientation="vertical"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+    <TextView
+        android:id="@+id/label_Register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Please fill in all the fields below:"
+        android:gravity="center"
+        android:textColor="@color/colorRed"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
+
+        </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+    <TextView
+        android:id="@+id/label_UserName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="UserName: "
+        android:textColor="@color/colorBlack"
+        android:textSize="16sp"
+        android:textStyle="bold"/>
+
+        <EditText
+            android:id="@+id/edt_UserName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="UserName" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+    <TextView
+        android:id="@+id/label_Password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Password: "
+        android:textColor="@color/colorBlack"
+        android:textSize="16sp"
+        android:textStyle="bold"/>
+    <EditText
+        android:id="@+id/edt_Password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:hint="Password" />
+    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+    <TextView
+        android:id="@+id/label_FirstName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="First Name: "
+        android:textColor="@color/colorBlack"
+        android:textSize="16sp"
+        android:textStyle="bold"/>
+    <EditText
+        android:id="@+id/edt_FirstName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="First Name" />
+        </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+    <TextView
+        android:id="@+id/label_LastName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Last Name: "
+        android:textColor="@color/colorBlack"
+        android:textSize="16sp"
+        android:textStyle="bold"/>
+    <EditText
+        android:id="@+id/edt_LastName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Last Name" />
+            </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+    <TextView
+        android:id="@+id/label_City"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="City: "
+        android:textColor="@color/colorBlack"
+        android:textSize="16sp"
+        android:textStyle="bold"/>
+    <EditText
+        android:id="@+id/edt_City"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="City" />
+                </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+    <TextView
+        android:id="@+id/label_Street"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Street: "
+        android:textColor="@color/colorBlack"
+        android:textSize="16sp"
+        android:textStyle="bold"/>
+    <EditText
+        android:id="@+id/edt_Street"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Street" />
+                    </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+    <TextView
+        android:id="@+id/label_Email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email: "
+        android:textColor="@color/colorBlack"
+        android:textSize="16sp"
+        android:textStyle="bold"/>
+    <EditText
+        android:id="@+id/edt_Email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        android:hint="Email" />
+                        </LinearLayout>
+    <ImageButton
+        android:id="@+id/btn_image"
+        android:layout_width="128dp"
+        android:layout_height="128dp"
+         android:src="@drawable/add_photo"
+        android:layout_gravity="center"/>
+    <Button
+        android:id="@+id/btn_Confirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Confirm"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:textColor="@color/colorWhite"
+        android:background="@drawable/btn"
+        android:layout_margin="10dp"
+       />
+
+</LinearLayout>
+</ScrollView>
