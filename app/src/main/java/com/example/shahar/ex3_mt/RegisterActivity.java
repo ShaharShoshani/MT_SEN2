@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 public class RegisterActivity extends AppCompatActivity {
 private Button btn_Confirm;
@@ -33,6 +34,10 @@ private Button btn_Confirm;
                 intent.setType("image/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
+                ImageButton btn = (ImageButton)findViewById(R.id.btn_image);
+                btn.setImageResource(R.drawable.uploaded_photo);
+
+
 
             }
         });

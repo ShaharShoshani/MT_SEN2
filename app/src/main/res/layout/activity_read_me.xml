@@ -22,27 +22,32 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="here you can see what our app does"
+        android:text="@string/ReadMe"
         android:textColor="@color/colorReadmeText"
         android:textSize="20sp"
         />
-    <Button
-        android:id="@+id/btn_readmeBackToMenu"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="300dp"
-        android:text="Back to Menu"
-        android:textSize="20sp"
-        android:textColor="@color/colorWhite"
-        android:textStyle="bold"
-        android:background="@drawable/btn"
-        android:padding="10dp"
-        android:layout_margin="10dp"/>
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:gravity="bottom"
+        android:layout_weight="1"
+        >
+        <Button
+            android:id="@+id/btn_readmeBackToMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Back to menu"
+            android:textSize="20sp"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
+            android:background="@drawable/btn"
+
+            />
 
 
+    </LinearLayout>
 
-
-
-
-
+    >
 </LinearLayout>
+

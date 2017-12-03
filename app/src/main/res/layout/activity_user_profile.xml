@@ -5,9 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:layout_alignParentBottom="true"
     tools:context="com.example.shahar.ex3_mt.UserProfile"
     android:layoutDirection="ltr"
-    android:background="@color/background">
+    android:background="@color/background"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -111,6 +113,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+
         >
         <TextView
             android:id="@+id/tv_city_MyProfile"
@@ -134,6 +137,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+
         >
         <TextView
             android:id="@+id/tv_email_MyProfile"
@@ -150,15 +154,16 @@
             android:layout_height="wrap_content"
             android:enabled="false"
             android:text="ENS@gmail.com"
+
             />
 
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="horizontal"
-        android:layout_marginTop="190dp"
-
+        android:gravity="bottom"
+        android:layout_weight="1"
         >
         <Button
             android:id="@+id/btn_backtomenu_MyProfile"
@@ -168,9 +173,11 @@
             android:textSize="20sp"
             android:textColor="#ffffff"
             android:textStyle="bold"
-android:background="@drawable/btn"
+            android:background="@drawable/btn"
+
             />
 
 
     </LinearLayout>
+
 </LinearLayout>
