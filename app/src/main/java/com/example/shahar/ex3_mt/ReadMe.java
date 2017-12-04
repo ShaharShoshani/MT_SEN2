@@ -20,6 +20,7 @@ public class ReadMe extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i=new Intent(ReadMe.this,HomePage.class);
                 startActivity(i);
+                finish();
 
             }
         });

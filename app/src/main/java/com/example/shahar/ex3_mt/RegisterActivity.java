@@ -1,6 +1,7 @@
 package com.example.shahar.ex3_mt;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -9,7 +10,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 
 public class RegisterActivity extends AppCompatActivity {
-private Button btn_Confirm;
+    private Button btn_Confirm;
     private ImageButton btn_image;
     public static final int PICK_IMAGE = 1;
     @Override
@@ -35,7 +36,8 @@ private Button btn_Confirm;
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
                 ImageButton btn = (ImageButton)findViewById(R.id.btn_image);
-                btn.setImageResource(R.drawable.uploaded_photo);
+                btn.setImageResource(0);
+                btn.setBackgroundResource(R.drawable.uploaded_photo);
 
 
 
