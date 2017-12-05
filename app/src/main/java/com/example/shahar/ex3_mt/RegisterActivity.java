@@ -1,7 +1,7 @@
 package com.example.shahar.ex3_mt;
 
 import android.content.Intent;
-import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -35,14 +35,27 @@ public class RegisterActivity extends AppCompatActivity {
                 intent.setType("image/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
-                ImageButton btn = (ImageButton)findViewById(R.id.btn_image);
-                btn.setImageResource(0);
-                btn.setBackgroundResource(R.drawable.uploaded_photo);
+                //ImageButton btn = (ImageButton)findViewById(R.id.btn_image);
+                //btn.setImageResource(0);
+                //btn.setBackgroundResource(R.drawable.uploaded_photo);
 
 
 
             }
         });
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == PICK_IMAGE && resultCode == RESULT_OK) {
+            Uri uri = data.getData();
+            ImageView x=(ImageView)findViewById(R.id.btn_image);
+            x.setImageURI(uri);
+            x.setBackgroundColor(0);
+        }
 
     }
 }
