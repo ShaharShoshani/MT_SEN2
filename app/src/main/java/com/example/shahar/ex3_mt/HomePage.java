@@ -1,6 +1,10 @@
 package com.example.shahar.ex3_mt;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -18,6 +22,8 @@ public class HomePage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
+
+
 
         btn_myprofile_HomePage = (Button) findViewById(R.id.btn_myprofile_HomePage);
         btn_myprofile_HomePage.setOnClickListener(new View.OnClickListener() {
