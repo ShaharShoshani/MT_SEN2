@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
@@ -21,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -35,7 +37,7 @@ public class RegisterActivity extends AppCompatActivity {
     private ImageButton btn_image;
     private ImageButton btn_camera;
     private ImageView x;
-    //private Uri outputFileUri;
+    private Uri outputFileUri;
     //private  String file="";
     public static final int PICK_IMAGE = 1;
     public static final int TAKE_IMAGE = 2;
@@ -53,16 +55,16 @@ public class RegisterActivity extends AppCompatActivity {
             }
         }
         final String dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/picFolder/";
-        File newdir = new File(dir);
+        final File newdir = new File(dir);
         newdir.mkdirs();
 
         btn_Confirm=(Button) findViewById(R.id.btn_Confirm);
         btn_Confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-        Intent i = new Intent(RegisterActivity.this, HomePage.class);
-        startActivity(i);
-        finish();
+                Intent i = new Intent(RegisterActivity.this, HomePage.class);
+                startActivity(i);
+                finish();
             }
         });
 
@@ -70,18 +72,33 @@ public class RegisterActivity extends AppCompatActivity {
         btn_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                intent.setType("image/*");
-                intent.putExtra("crop", "true");
-                intent.putExtra("scale", true);
-                intent.putExtra("outputX", 256);
-                intent.putExtra("outputY", 256);
-                intent.putExtra("aspectX", 1);
-                intent.putExtra("aspectY", 1);
-                intent.putExtra("return-data", true);
+                Intent intent=null;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+
+                    intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    intent.setType("image/*");
+                }
+                else
+                {
+                    intent=new Intent();
+                    intent.setType("image/*");
+                    intent.setAction(Intent.ACTION_GET_CONTENT);
+                    intent.setType("image/*");
+                    intent.putExtra("crop", "true");
+                    intent.putExtra("scale", true);
+                    intent.putExtra("outputX", 256);
+                    intent.putExtra("outputY", 256);
+                    intent.putExtra("aspectX", 1);
+                    intent.putExtra("aspectY", 1);
+                    intent.putExtra("return-data", true);
+                    //startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
+                }
+                //intent.setType("image/*");
+                //intent.setAction(Intent.ACTION_GET_CONTENT);
+                //intent.setType("image/*");
+
                 startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
+
 
             }
         });
@@ -98,9 +115,16 @@ public class RegisterActivity extends AppCompatActivity {
                 cameraIntent.putExtra("aspectX", 1);
                 cameraIntent.putExtra("aspectY", 1);
                 cameraIntent.putExtra("return-data", true);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+
+                    Calendar calendar=Calendar.getInstance();
+                    String file =dir+calendar.getTimeInMillis()+".jpg";
+                    File newfile=new File(file);
+                    outputFileUri=Uri.fromFile(newfile);
+                    cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
+
+                }
                 startActivityForResult(cameraIntent, TAKE_IMAGE);
-
-
             }
         });
 
@@ -114,26 +138,72 @@ public class RegisterActivity extends AppCompatActivity {
             Uri uri = data.getData();
             x=(ImageView)findViewById(R.id.imageview);
             final Bundle extras = data.getExtras();
-            Bitmap bm = extras.getParcelable("data");
-            x.setImageBitmap(bm);
-            //x.setImageURI(null);
-            //x.setImageURI(uri);
-            x.setBackgroundColor(0);
-            Toast.makeText(getApplicationContext(),"Photo uploaded successfully",Toast.LENGTH_LONG).show();
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+                Bitmap bm = extras.getParcelable("data");
+                Uri uribit=getImageUri(getApplicationContext(),bm);
+                String path=getRealPathFrpomURI(uribit);
+                path=path.substring(path.lastIndexOf(".")+1);
+                if(path.equals("jpg")|| path.equals("png")) {
+                    x.setImageBitmap(bm);
+                    Toast.makeText(getApplicationContext(), path+" uploaded successfully", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    Toast.makeText(getApplicationContext(),"Illegal format",Toast.LENGTH_LONG).show();
+
+                }
+            }
+            else
+            {
+                String path=getRealPathFrpomURI(uri);
+                path=path.substring(path.lastIndexOf(".")+1);
+                if(path.equals("jpg")|| path.equals("png")) {
+                    x.setImageURI(null);
+                    x.setImageURI(uri);
+                    x.setBackgroundColor(0);
+                    Toast.makeText(getApplicationContext(),path+" uploaded successfully "+path,Toast.LENGTH_LONG).show();
+                }
+                else
+                {
+                    Toast.makeText(getApplicationContext(),"Illegal format",Toast.LENGTH_LONG).show();
+                }
+            }
+
+
         }
         else if (requestCode == TAKE_IMAGE && resultCode == RESULT_OK){
             x=(ImageView)findViewById(R.id.imageview);
-            final Bundle extras = data.getExtras();
-            Bitmap bm = extras.getParcelable("data");
-            x.setImageBitmap(bm);
-            //x.setImageURI(null);
-            //x.setImageURI(outputFileUri);
-            x.setBackgroundColor(0);
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+                final Bundle extras = data.getExtras();
+                Bitmap bm = extras.getParcelable("data");
+                x.setImageBitmap(bm);
+            }
+            else{
+                x.setImageURI(null);
+                x.setImageURI(outputFileUri);
+                x.setBackgroundColor(0);
+            }
+
             Toast.makeText(getApplicationContext(),"Photo uploaded successfully",Toast.LENGTH_LONG).show();
         }
 
     }
+    private String getRealPathFrpomURI(Uri uri)
+    {
+        String[] filePathColumn = {MediaStore.Images.Media.DATA};
+        Cursor cursor = getContentResolver().query(uri, filePathColumn, null, null, null);
+        cursor.moveToFirst();
+        int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+        String filePath = cursor.getString(columnIndex);
+        cursor.close();
+        return filePath;
+    }
 
+    public Uri getImageUri(Context inContext, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+        return Uri.parse(path);
+    }
 
 
 }
