@@ -91,11 +91,8 @@ public class RegisterActivity extends AppCompatActivity {
                     intent.putExtra("aspectX", 1);
                     intent.putExtra("aspectY", 1);
                     intent.putExtra("return-data", true);
-                    //startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
+
                 }
-                //intent.setType("image/*");
-                //intent.setAction(Intent.ACTION_GET_CONTENT);
-                //intent.setType("image/*");
 
                 startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
 
@@ -108,14 +105,8 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                //cameraIntent.putExtra("crop", "true");
-                cameraIntent.putExtra("scale", true);
-                cameraIntent.putExtra("outputX", 256);
-                cameraIntent.putExtra("outputY", 256);
-                cameraIntent.putExtra("aspectX", 1);
-                cameraIntent.putExtra("aspectY", 1);
-                cameraIntent.putExtra("return-data", true);
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+
+                if (Build.VERSION.SDK_INT == Build.VERSION_CODES.M) {
 
                     Calendar calendar=Calendar.getInstance();
                     String file =dir+calendar.getTimeInMillis()+".jpg";
@@ -172,15 +163,15 @@ public class RegisterActivity extends AppCompatActivity {
         }
         else if (requestCode == TAKE_IMAGE && resultCode == RESULT_OK){
             x=(ImageView)findViewById(R.id.imageview);
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-                final Bundle extras = data.getExtras();
-                Bitmap bm = extras.getParcelable("data");
-                x.setImageBitmap(bm);
-            }
-            else{
+            if (Build.VERSION.SDK_INT == Build.VERSION_CODES.M) {
                 x.setImageURI(null);
                 x.setImageURI(outputFileUri);
                 x.setBackgroundColor(0);
+            }
+            else{
+                final Bundle extras = data.getExtras();
+                Bitmap bm = extras.getParcelable("data");
+                x.setImageBitmap(bm);
             }
 
             Toast.makeText(getApplicationContext(),"Photo uploaded successfully",Toast.LENGTH_LONG).show();
