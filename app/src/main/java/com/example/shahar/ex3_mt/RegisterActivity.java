@@ -6,31 +6,33 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import java.io.BufferedReader;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.Calendar;
-
-import static android.content.Intent.URI_ALLOW_UNSAFE;
 
 public class RegisterActivity extends AppCompatActivity {
     private Button btn_Confirm;
@@ -38,13 +40,33 @@ public class RegisterActivity extends AppCompatActivity {
     private ImageButton btn_camera;
     private ImageView x;
     private Uri outputFileUri;
+    private EditText inputUserName;
+    private EditText inputPassword;
+    private EditText inputFirstName;
+    private EditText inputLastName;
+    private EditText inputCity;
+    private EditText inputStreet;
+    private EditText inputEmail;
+    private FirebaseDatabase database ;
+    private DatabaseReference refDatabase;
+    private FirebaseAuth mAuth;
+    private boolean flag=false;
+    private String uid;
+    private User user;
+    private static final String TAG = "EmailPassword";
+
+
+
     //private  String file="";
     public static final int PICK_IMAGE = 1;
     public static final int TAKE_IMAGE = 2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        mAuth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance();
         String[] permissions = new String[]{ Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE};
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) !=
                 PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) !=
@@ -62,10 +84,69 @@ public class RegisterActivity extends AppCompatActivity {
         btn_Confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(RegisterActivity.this, HomePage.class);
-                startActivity(i);
-                finish();
+                String userName= inputUserName.getText().toString();
+                String password=inputPassword.getText().toString();
+                String firstName=inputFirstName.getText().toString();
+                String lastName=inputLastName.getText().toString();
+                String city=inputCity.getText().toString();
+                String street=inputStreet.getText().toString();
+                String email=inputEmail.getText().toString();
+                if((!userName.equals("") && !password.equals("") && !firstName.equals("") &&
+                        !lastName.equals("") && !city.equals("") && !street.equals("") &&
+                        !email.equals("") )) {
+                    View focusView = null;
+                    if(password.length()>=6) {
+                        if(email.contains("@")) {
+                            user = new User(userName, password, firstName, lastName, city, street, email);
+                            refDatabase = database.getReference();
+                            mAuth.createUserWithEmailAndPassword(user.getEmail(), user.getPassword())
+                                    .addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<AuthResult> task) {
+                                            if (task.isSuccessful()) {
+                                                // Sign in success, update UI with the signed-in user's information
+                                                Log.d(TAG, "createUserWithEmail:success");
+                                                Toast.makeText(RegisterActivity.this, "Authentication succsess.",
+                                                        Toast.LENGTH_LONG).show();
+                                                FirebaseUser fuser = mAuth.getCurrentUser();
+                                                uid = fuser.getUid();
+                                                refDatabase.child("Users").child("Regular-User").child(uid).setValue(user);
+                                                Intent i = new Intent(RegisterActivity.this, HomePage.class);
+                                                startActivity(i);
+                                                finish();
+                                            } else {
+                                                // If sign in fails, display a message to the user.
+                                                Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                                                Toast.makeText(RegisterActivity.this, "Authentication failed.",
+                                                        Toast.LENGTH_LONG).show();
+                                            }
+
+                                        }
+                                    });
+                        }
+                        else {
+                            Toast.makeText(RegisterActivity.this, getString(R.string.error_invalid_email),
+                                    Toast.LENGTH_LONG).show();
+
+
+                        }
+                    }
+                    else {
+                        Toast.makeText(RegisterActivity.this, getString(R.string.error_invalid_password),
+                                Toast.LENGTH_LONG).show();
+
+                    }
+                }
+                else{
+                    Toast.makeText(RegisterActivity.this, "Please add the missing field..",
+                            Toast.LENGTH_SHORT).show();
+
+                }
+
+
             }
+
+
         });
 
         btn_image=(ImageButton) findViewById(R.id.btn_image) ;
@@ -118,6 +199,15 @@ public class RegisterActivity extends AppCompatActivity {
                 startActivityForResult(cameraIntent, TAKE_IMAGE);
             }
         });
+
+        inputUserName=(EditText)findViewById(R.id.edt_UserName);
+        inputPassword=(EditText)findViewById(R.id.edt_Password);
+        inputFirstName=(EditText)findViewById(R.id.edt_FirstName);
+        inputLastName=(EditText)findViewById(R.id.edt_LastName);
+        inputCity=(EditText)findViewById(R.id.edt_City);
+        inputStreet=(EditText)findViewById(R.id.edt_Street);
+        inputEmail=(EditText)findViewById(R.id.edt_Email);
+
 
     }
 
@@ -194,6 +284,25 @@ public class RegisterActivity extends AppCompatActivity {
         inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
         String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
         return Uri.parse(path);
+    }
+
+    private void create_user_in_auth(User user){
+        mAuth.createUserWithEmailAndPassword(user.getEmail(), user.getPassword())
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            flag=true;
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Toast.makeText(RegisterActivity.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                });
     }
 
 

@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class HomePage extends AppCompatActivity {
     private Button btn_myprofile_HomePage;
     private Button btn_readme_HomePage;
@@ -43,6 +45,7 @@ public class HomePage extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i=new Intent(HomePage.this,ReadMe.class);
                 startActivity(i);
+                finish();
 
             }
         });
@@ -60,6 +63,9 @@ public class HomePage extends AppCompatActivity {
         btn_logout_HomePage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                FirebaseAuth mAuth= FirebaseAuth.getInstance();
+                if(mAuth != null)
+                    mAuth.signOut();
                 Intent i=new Intent(HomePage.this,LoginActivity.class);
                 startActivity(i);
                 finish();
