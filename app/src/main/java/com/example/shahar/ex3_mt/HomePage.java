@@ -17,15 +17,28 @@ public class HomePage extends AppCompatActivity {
     private Button btn_readme_HomePage;
     private Button btn_map_HomePage;
     private Button btn_logout_HomePage;
-
+    private Button btn_Products_HomePage;
+    private Button btn_Suppliers_HomePage;
+    private FirebaseAuth mAuth;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
-
-
+        mAuth=FirebaseAuth.getInstance();
+        if(mAuth.getCurrentUser().getUid().equals("Admin")) {
+            btn_Suppliers_HomePage = (Button) findViewById(R.id.btn_Suppliers_HomePage);
+            btn_Suppliers_HomePage.setVisibility(View.VISIBLE);
+            btn_Suppliers_HomePage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = new Intent(HomePage.this, SuppliersActivity.class);
+                    startActivity(i);
+                    finish();
+                }
+            });
+        }
 
         btn_myprofile_HomePage = (Button) findViewById(R.id.btn_myprofile_HomePage);
         btn_myprofile_HomePage.setOnClickListener(new View.OnClickListener() {
@@ -34,8 +47,6 @@ public class HomePage extends AppCompatActivity {
                 Intent i=new Intent(HomePage.this,UserProfile.class);
                 startActivity(i);
                 finish();
-
-
             }
         });
 
@@ -46,7 +57,6 @@ public class HomePage extends AppCompatActivity {
                 Intent i=new Intent(HomePage.this,ReadMe.class);
                 startActivity(i);
                 finish();
-
             }
         });
 
@@ -56,14 +66,13 @@ public class HomePage extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i=new Intent(HomePage.this,MapsActivity.class);
                 startActivity(i);
-
             }
         });
+
         btn_logout_HomePage=(Button)findViewById(R.id.btn_logout_HomePage);
         btn_logout_HomePage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FirebaseAuth mAuth= FirebaseAuth.getInstance();
                 if(mAuth != null)
                     mAuth.signOut();
                 Intent i=new Intent(HomePage.this,LoginActivity.class);
@@ -72,5 +81,19 @@ public class HomePage extends AppCompatActivity {
 
             }
         });
+
+        btn_Products_HomePage = (Button) findViewById(R.id.btn_Products_HomePage);
+        btn_Products_HomePage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i=new Intent(HomePage.this,ProductsActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
+
+
     }
 }
+
+

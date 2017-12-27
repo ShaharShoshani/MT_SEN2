@@ -57,7 +57,7 @@ public class UserProfile extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
-                DataSnapshot get=dataSnapshot.child("Regular-User").child(uid);
+                DataSnapshot get=dataSnapshot.child(uid);
                 String x;
                 if(get != null) {
                     x = "Getting User Info...";

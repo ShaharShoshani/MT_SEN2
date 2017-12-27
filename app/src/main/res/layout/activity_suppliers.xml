@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="vertical"
+    android:background="@color/background">
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.example.shahar.ex3_mt.RegisterActivity"
+        android:layoutDirection="ltr"
+        android:orientation="vertical"
+        >
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Suppliers"
+        android:gravity="center"
+        android:textColor="@color/colorReadme"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/Suppliers"
+        android:textColor="@color/colorRed"
+        android:textSize="20sp"
+        />
+    <TextView
+        android:id="@+id/view_suppliers_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Suppliers list:"
+        android:textColor="@color/colorReadmeText"
+        android:textSize="20sp"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+
+        >
+    <TextView
+        android:id="@+id/tv_name_supplier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:text="Supplier name:"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        />
+    <EditText
+        android:id="@+id/edt_name_supplier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="5"
+        />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+
+        >
+        <TextView
+            android:id="@+id/tv_contact_supplier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="Contact info:"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            />
+        <EditText
+            android:id="@+id/edt_contact_supplier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="5"
+
+            />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_add_Suppliers"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="add supplier"
+        android:textSize="20sp"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        android:background="@drawable/btn"
+        android:padding="10dp"
+        android:layout_margin="10dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:gravity="bottom"
+        android:layout_weight="1"
+        >
+
+
+        <Button
+            android:id="@+id/btn_supplierBackToMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Back to menu"
+            android:textSize="20sp"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
+            android:background="@drawable/btn"
+
+            />
+
+
+    </LinearLayout>
+
+</LinearLayout>
+    </ScrollView>

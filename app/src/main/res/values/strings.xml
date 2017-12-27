@@ -18,4 +18,9 @@
         Features Include:\nBrowse through millions of products in your favorite categories
         Add items to your Cart or Wish List and view them at anytime
     </string>
+    <string name="Suppliers">Admin access
+    </string>
+
+    <string name="Products">Admin access
+    </string>
 </resources>

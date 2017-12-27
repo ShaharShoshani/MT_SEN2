@@ -110,7 +110,7 @@ public class RegisterActivity extends AppCompatActivity {
                                                         Toast.LENGTH_LONG).show();
                                                 FirebaseUser fuser = mAuth.getCurrentUser();
                                                 uid = fuser.getUid();
-                                                refDatabase.child("Users").child("Regular-User").child(uid).setValue(user);
+                                                refDatabase.child("Users").child(uid).setValue(user);
                                                 Intent i = new Intent(RegisterActivity.this, HomePage.class);
                                                 startActivity(i);
                                                 finish();

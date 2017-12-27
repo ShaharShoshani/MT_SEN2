@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="vertical"
+    android:background="@color/background">
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.example.shahar.ex3_mt.RegisterActivity"
+        android:layoutDirection="ltr"
+        android:orientation="vertical"
+        >
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Products"
+            android:gravity="center"
+            android:textColor="@color/colorReadme"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            />
+        <TextView
+            android:id="@+id/view_admin_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="@string/Products"
+            android:textColor="@color/colorRed"
+            android:textSize="20sp"
+            android:visibility="invisible"
+            />
+        <TextView
+            android:id="@+id/view_products_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="Products list:"
+            android:textColor="@color/colorReadmeText"
+            android:textSize="20sp"
+            />
+
+            <LinearLayout
+                android:id="@+id/ll_products_name"
+                android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+
+
+            >
+            <TextView
+                android:id="@+id/tv_name_product"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="Product name:"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:visibility="invisible"
+                />
+            <EditText
+                android:id="@+id/edt_name_product"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="5"
+                android:visibility="invisible"
+
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_products_quantity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+
+
+            >
+            <TextView
+                android:id="@+id/tv_quantity_product"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="quantity:"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:visibility="invisible"
+
+                />
+            <EditText
+                android:id="@+id/edt_quantity_product"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="5"
+                android:visibility="invisible"
+
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_products_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:id="@+id/tv_price_product"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="price:"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:visibility="invisible"
+
+                />
+            <EditText
+                android:id="@+id/edt_price_product"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="5"
+                android:visibility="invisible"
+
+                />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_add_products"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="add Product"
+            android:visibility="invisible"
+            android:textSize="20sp"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
+            android:background="@drawable/btn"
+            android:padding="10dp"
+            android:layout_margin="10dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="bottom"
+            android:layout_weight="1"
+            >
+
+
+            <Button
+                android:id="@+id/btn_ProductsBackToMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Back to menu"
+                android:textSize="20sp"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:background="@drawable/btn"
+
+                />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>
