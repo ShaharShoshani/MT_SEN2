@@ -57,26 +57,26 @@ public class UserProfile extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
-                DataSnapshot get=dataSnapshot.child(uid);
-                String x;
-                if(get != null) {
-                    x = "Getting User Info...";
-                    User user = get.getValue(User.class);
-                    inputUserName.setText(user.getUserName());
-                    inputFirstName.setText(user.getFirstName());
-                    inputLastName.setText(user.getLastName());
-                    inputCity.setText(user.getCity());
-                    inputStreet.setText(user.getStreet());
-                    inputEmail.setText(user.getEmail());
+                if (!uid.equals("Admin")) {
+                    DataSnapshot get = dataSnapshot.child(uid);
+                    String x;
+                    if (get != null) {
+                        x = "Getting User Info...";
+                        User user = get.getValue(User.class);
+                        inputUserName.setText(user.getUserName());
+                        inputFirstName.setText(user.getFirstName());
+                        inputLastName.setText(user.getLastName());
+                        inputCity.setText(user.getCity());
+                        inputStreet.setText(user.getStreet());
+                        inputEmail.setText(user.getEmail());
+                    } else
+                        x = "Can't Get User Info";
+                    Toast.makeText(UserProfile.this, x,
+                            Toast.LENGTH_LONG).show();
+
+
                 }
-                else
-                    x="Can't Get User Info";
-                Toast.makeText(UserProfile.this, x,
-                        Toast.LENGTH_LONG).show();
-
-
             }
-
             @Override
             public void onCancelled(DatabaseError error) {
                 // Failed to read value
