@@ -23,12 +23,17 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -49,6 +54,7 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText inputEmail;
     private FirebaseDatabase database ;
     private DatabaseReference refDatabase;
+    private StorageReference mStorageRef;
     private FirebaseAuth mAuth;
     private boolean flag=false;
     private String uid;
@@ -67,11 +73,14 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
         mAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
-        String[] permissions = new String[]{ Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE};
+        mStorageRef = FirebaseStorage.getInstance().getReference();
+        String[] permissions = new String[]{ Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE
+        ,Manifest.permission.INTERNET};
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) !=
                 PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) !=
                 PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) !=
-                PackageManager.PERMISSION_GRANTED  ) {
+                PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(this, Manifest.permission.INTERNET) !=
+                PackageManager.PERMISSION_GRANTED ) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 requestPermissions(permissions, 124);
             }
@@ -110,6 +119,24 @@ public class RegisterActivity extends AppCompatActivity {
                                                         Toast.LENGTH_LONG).show();
                                                 FirebaseUser fuser = mAuth.getCurrentUser();
                                                 uid = fuser.getUid();
+                                                StorageReference riversRef=mStorageRef.child("UsersImages").child(uid);//Upload to Storage in UsersImages/UID
+                                                riversRef.putFile(outputFileUri)
+                                                        .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                                            @Override
+                                                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                                                // Get a URL to the uploaded content
+                                                                Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                                                                user.setUriimage(downloadUrl.getPath());
+
+                                                            }
+                                                        }).addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e) {
+                                                        Toast.makeText(RegisterActivity.this, e.getMessage(),
+                                                                Toast.LENGTH_LONG).show();
+                                                    }
+                                                });
+
                                                 refDatabase.child("Users").child(uid).setValue(user);
                                                 Intent i = new Intent(RegisterActivity.this, HomePage.class);
                                                 startActivity(i);
@@ -214,14 +241,14 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
+        Uri uri = data.getData();
         if (requestCode == PICK_IMAGE && resultCode == RESULT_OK) {
-            Uri uri = data.getData();
             x=(ImageView)findViewById(R.id.imageview);
             final Bundle extras = data.getExtras();
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
                 Bitmap bm = extras.getParcelable("data");
                 Uri uribit=getImageUri(getApplicationContext(),bm);
+                outputFileUri=uribit;
                 String path=getRealPathFrpomURI(uribit);
                 path=path.substring(path.lastIndexOf(".")+1);
                 if(path.equals("jpg")|| path.equals("png")) {
@@ -241,6 +268,7 @@ public class RegisterActivity extends AppCompatActivity {
                     x.setImageURI(null);
                     x.setImageURI(uri);
                     x.setBackgroundColor(0);
+                    outputFileUri=uri;
                     Toast.makeText(getApplicationContext(),path+" uploaded successfully "+path,Toast.LENGTH_LONG).show();
                 }
                 else
@@ -260,12 +288,16 @@ public class RegisterActivity extends AppCompatActivity {
             }
             else{
                 final Bundle extras = data.getExtras();
+                outputFileUri=uri;
                 Bitmap bm = extras.getParcelable("data");
                 x.setImageBitmap(bm);
             }
 
             Toast.makeText(getApplicationContext(),"Photo uploaded successfully",Toast.LENGTH_LONG).show();
         }
+
+
+
 
     }
     private String getRealPathFrpomURI(Uri uri)

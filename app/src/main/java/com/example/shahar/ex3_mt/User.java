@@ -1,5 +1,7 @@
 package com.example.shahar.ex3_mt;
 
+import android.net.Uri;
+
 /**
  * Created by eliran on 18/12/17.
  */
@@ -12,6 +14,7 @@ public class User {
     private String City;
     private String Street;
     private String Email;
+    private String uriimage;
 
 
     public User(String userName, String password, String firstName, String lastName, String city, String street, String email) {
@@ -25,6 +28,14 @@ public class User {
     }
 
     public User(){}
+
+    public String getUriimage() {
+        return uriimage;
+    }
+
+    public void setUriimage(String uriimage) {
+        this.uriimage = uriimage;
+    }
 
     public String getUserName() {
         return UserName;
