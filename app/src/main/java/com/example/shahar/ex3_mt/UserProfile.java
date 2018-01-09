@@ -49,7 +49,6 @@ public class UserProfile extends AppCompatActivity {
     private ImageView inputPhoto;
     private StorageReference mStorageRef;
     private String uid;
-    private FirebaseAnalytics mFirebaseAnalytics;
 
 
     @Override
@@ -66,7 +65,6 @@ public class UserProfile extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("Users");
         mAuth=FirebaseAuth.getInstance();
-        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         uid=mAuth.getCurrentUser().getUid();
         mStorageRef = FirebaseStorage.getInstance().getReference();
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -127,11 +125,6 @@ public class UserProfile extends AppCompatActivity {
             }
         });
 
-        Bundle bundle = new Bundle();
-        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "id");
-        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "name");
-        bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "user_profile");
-        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
 
     }
 }
