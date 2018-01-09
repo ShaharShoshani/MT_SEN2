@@ -288,8 +288,9 @@ public class RegisterActivity extends AppCompatActivity {
             }
             else{
                 final Bundle extras = data.getExtras();
-                outputFileUri=uri;
                 Bitmap bm = extras.getParcelable("data");
+                Uri uribit=getImageUri(getApplicationContext(),bm);
+                outputFileUri=uribit;
                 x.setImageBitmap(bm);
             }
 

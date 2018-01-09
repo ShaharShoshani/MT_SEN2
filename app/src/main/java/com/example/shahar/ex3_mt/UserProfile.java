@@ -12,6 +12,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -29,6 +31,13 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+
+import com.bumptech.glide.Priority;
+import com.bumptech.glide.load.data.DataFetcher;
+import com.bumptech.glide.load.model.stream.StreamModelLoader;
+import com.google.android.gms.tasks.Tasks;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.StreamDownloadTask;
 
 import java.io.File;
 import java.io.IOException;
@@ -84,20 +93,10 @@ public class UserProfile extends AppCompatActivity {
                         inputCity.setText(user.getCity());
                         inputStreet.setText(user.getStreet());
                         inputEmail.setText(user.getEmail());
-                        StorageReference image=mStorageRef.child("UserImages").child(uid);
-                        image.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                            @Override
-                            public void onSuccess(Uri uri) {
-                                inputPhoto.setImageURI(uri);
-
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(UserProfile.this, e.getMessage(),
-                                        Toast.LENGTH_LONG).show();
-                            }
-                        });
+                        StorageReference image=mStorageRef.child("UsersImages").child(uid);
+                        Glide.with(UserProfile.this)
+                                .using(new FirebaseImageLoader())
+                                .load(image).into(inputPhoto);
 
                     } else
                         x = "Can't Get User Info";
