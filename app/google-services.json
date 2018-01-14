@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "769358911168",
+    "firebase_url": "https://canvas-fulcrum-187913.firebaseio.com",
+    "project_id": "canvas-fulcrum-187913",
+    "storage_bucket": "canvas-fulcrum-187913.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:769358911168:android:a66f45b0ba46cc23",
+        "android_client_info": {
+          "package_name": "com.example.shahar.ex3_mt"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "769358911168-gsfeajvl42pubd6u28b0pov0qpvqdvp2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.shahar.ex3_mt",
+            "certificate_hash": "3c7701b77207f5711a47c1c03069d6924ea172bd"
+          }
+        },
+        {
+          "client_id": "769358911168-pe0ucmq8acl6marso541chf74n3ld265.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMW-4oaApwhiyFkRAozrsdWgCf3vyHHLc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "769358911168-pe0ucmq8acl6marso541chf74n3ld265.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

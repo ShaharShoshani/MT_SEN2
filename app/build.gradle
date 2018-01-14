@@ -38,9 +38,20 @@ dependencies {
         compile 'com.github.bumptech.glide:glide:3.5.2'
         compile 'com.android.support:support-v4:25.0.0'
         compile 'com.firebaseui:firebase-ui-storage:0.6.0'
+
+    }
+    dependencies {
+
+        testCompile 'junit:junit:4.12'
+        // required if you want to use Mockito for unit tests
+        testCompile 'org.mockito:mockito-core:2.7.22'
+        // required if you want to use Mockito for Android tests
+        androidTestCompile 'org.mockito:mockito-android:2.7.22'
     }
     testCompile 'junit:junit:4.12'
+
 }
+
 
 
 apply plugin: 'com.google.gms.google-services'

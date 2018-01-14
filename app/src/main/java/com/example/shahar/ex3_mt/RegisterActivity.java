@@ -56,7 +56,6 @@ public class RegisterActivity extends AppCompatActivity {
     private DatabaseReference refDatabase;
     private StorageReference mStorageRef;
     private FirebaseAuth mAuth;
-    private boolean flag=false;
     private String uid;
     private User user;
     private static final String TAG = "EmailPassword";
@@ -318,25 +317,4 @@ public class RegisterActivity extends AppCompatActivity {
         String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
         return Uri.parse(path);
     }
-
-    private void create_user_in_auth(User user){
-        mAuth.createUserWithEmailAndPassword(user.getEmail(), user.getPassword())
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            flag=true;
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Toast.makeText(RegisterActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-
-                    }
-                });
-    }
-
-
 }
