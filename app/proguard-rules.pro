@@ -31,7 +31,7 @@ public FirebaseUser getCurrentUser();
 }
 
 #in our app we have to know which User is connected to the Firebase and what is the UID of this user.
--keep class *import com.google.firebase.auth.FirebaseUser{
+-keep class * com.google.firebase.auth.FirebaseUser{
 public abstract String getUid();
 }
 

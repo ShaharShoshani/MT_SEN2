@@ -18,6 +18,9 @@ public class HomePage extends AppCompatActivity {
     private Button btn_readme_HomePage;
     private Button btn_map_HomePage;
     private Button btn_logout_HomePage;
+
+
+
     private Button btn_Products_HomePage;
     private Button btn_Suppliers_HomePage;
     private FirebaseAuth mAuth;
@@ -69,7 +72,7 @@ public class HomePage extends AppCompatActivity {
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
                 bundle.putInt("Map_btn",view.getId());
-                mFirebaseAnalytics.logEvent("MapClick", bundle);
+                mFirebaseAnalytics.logEvent("MapClicki", bundle);
                 Intent i=new Intent(HomePage.this,MapsActivity.class);
                 startActivity(i);
             }

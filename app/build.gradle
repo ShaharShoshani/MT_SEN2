@@ -5,7 +5,7 @@ android {
     buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "com.example.shahar.ex3_mt"
-        minSdkVersion 16
+        minSdkVersion 18
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
@@ -20,9 +20,19 @@ android {
 }
 
 dependencies {
+    configurations.all {
+        resolutionStrategy.force 'com.android.support:support-annotations:25.3.1'
+
+    }
+
     implementation 'com.google.firebase:firebase-storage:11.0.4'
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+
+    androidTestCompile 'com.android.support.test:runner:1.0.1'
+    androidTestCompile 'com.android.support.test:rules:1.0.1'
+
+
+    androidTestCompile('com.android.support.test.espresso:espresso-core:3.0.1', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile 'com.google.android.gms:play-services-location:11.0.4'
@@ -48,6 +58,11 @@ dependencies {
         // required if you want to use Mockito for Android tests
         androidTestCompile 'org.mockito:mockito-android:2.7.22'
     }
+
+    dependencies {
+        androidTestCompile 'com.android.support.test.uiautomator:uiautomator-v18:2.1.1'
+    }
+
     testCompile 'junit:junit:4.12'
 
 }
