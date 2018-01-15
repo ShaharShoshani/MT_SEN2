@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <lint>
 
-    <issue id="UnusedAttribute" severity="error"></issue>
-    <issue id="Typos" severity="error"></issue>
+    <issue id="UnusedAttribute" severity="warning"></issue>
+    <issue id="Typos" severity="warning"></issue>
 
 </lint>
